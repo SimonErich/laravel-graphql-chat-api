@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -36,5 +36,26 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+    * Report exceptions to sentry.
+    *
+    * @param Throwable $Exception
+    * @return void
+    * @throws BindingResolutionException
+    * @throws Throwable
+    */
+    public function report(Throwable $Exception)
+    {
+        if (
+            $this->shouldReport($Exception)
+            && app()->bound('sentry')
+            && config('sentry.dns')
+        ) {
+            app('sentry')->captureException($Exception);
+        }
+
+        parent::report($Exception);
     }
 }
