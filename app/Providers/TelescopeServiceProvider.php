@@ -2,13 +2,18 @@
 
 namespace App\Providers;
 
+use Laravel\Telescope\Telescope;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
-use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeApplicationServiceProvider;
 
 class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 {
+    /**
+     * Permisison to use this service.
+     */
+    const PERMISSION = 'platform.telescope';
+
     /**
      * Register any application services.
      *
@@ -63,9 +68,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewTelescope', function ($user) {
-            return in_array($user->email, [
-                //
-            ]);
+            return $user->hasAccess(self::PERMISSION);
         });
     }
 }
