@@ -11,3 +11,11 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/.laradock
+/.vscode
+*.code-workspace
+_lighthouse_ide_helper.php
+programmatic-types.graphql
+/docs/.vuepress/*
+!/docs/.vuepress/public/
+!/docs/.vuepress/config.js
