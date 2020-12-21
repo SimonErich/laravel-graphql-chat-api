@@ -3,8 +3,8 @@
 namespace App\Orchid;
 
 use Laravel\Scout\Searchable;
-use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemMenu;
+use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 
@@ -26,57 +26,31 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            ItemMenu::label('Example screen')
-                ->icon('monitor')
-                ->route('platform.example')
-                ->title('Navigation')
-                ->badge(function () {
-                    return 6;
-                }),
+            // debugging
+            ItemMenu::label('Telescope')
+                ->title('Debugging')
+                ->icon('magnifier')
+                ->url('/telescope')
+                ->permission('platform.telescope'),
 
-            ItemMenu::label('Dropdown menu')
-                ->slug('example-menu')
-                ->icon('code')
-                ->childs(),
-
-            ItemMenu::label('Sub element item 1')
-                ->place('example-menu')
-                ->icon('bag'),
-
-            ItemMenu::label('Sub element item 2')
-                ->place('example-menu')
-                ->icon('heart'),
-
-            ItemMenu::label('Basic Elements')
-                ->title('Form controls')
-                ->icon('note')
-                ->route('platform.example.fields'),
-
-            ItemMenu::label('Advanced Elements')
-                ->icon('briefcase')
-                ->route('platform.example.advanced'),
-
-            ItemMenu::label('Text Editors')
-                ->icon('list')
-                ->route('platform.example.editors'),
-
-            ItemMenu::label('Overview layouts')
-                ->title('Layouts')
-                ->icon('layers')
-                ->route('platform.example.layouts'),
-
-            ItemMenu::label('Chart tools')
-                ->icon('bar-chart')
-                ->route('platform.example.charts'),
-
-            ItemMenu::label('Cards')
-                ->icon('grid')
-                ->route('platform.example.cards'),
-
-            ItemMenu::label('Documentation')
-                ->title('Docs')
+            // documentation
+            ItemMenu::label('Blueprint')
+                ->title('Docs') // section title
                 ->icon('docs')
-                ->url('https://orchid.software/en/docs'),
+                ->url('https://github.com/tjventurini/laravel-blueprint')
+                ->permission('platform.docs'),
+            ItemMenu::label('Laravel')
+                ->icon('docs')
+                ->url('https://laravel.com/docs')
+                ->permission('platform.docs'),
+            ItemMenu::label('Orchid')
+                ->icon('docs')
+                ->url('https://orchid.software/en/docs')
+                ->permission('platform.docs'),
+            ItemMenu::label('Laradock')
+                ->icon('docs')
+                ->url('https://laradock.io/docs')
+                ->permission('platform.docs'),
         ];
     }
 
@@ -131,7 +105,9 @@ class PlatformProvider extends OrchidServiceProvider
         return [
             ItemPermission::group(__('Systems'))
                 ->addPermission('platform.systems.roles', __('Roles'))
-                ->addPermission('platform.systems.users', __('Users')),
+                ->addPermission('platform.systems.users', __('Users'))
+                ->addPermission('platform.docs', __('Documentation'))
+                ->addPermission('platform.telescope', __('Telescope')),
         ];
     }
 
