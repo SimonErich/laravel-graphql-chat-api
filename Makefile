@@ -67,6 +67,9 @@ bash:
 # execute any command using docker-compose 
 dc: 
 	@cd ./laradock && docker-compose $(filter-out $@,$(MAKECMDGOALS))
+# execute any command inside the workspace container 
+run:
+	@cd ./laradock && docker-compose exec --user=laradock workspace $(filter-out $@,$(MAKECMDGOALS))
 
 ########################################
 # application 
@@ -80,9 +83,12 @@ composer-dump:
 # run any composer command
 composer:
 	@cd ./laradock && docker-compose exec --user=laradock workspace composer $(filter-out $@,$(MAKECMDGOALS))
-# execute any artisan command
-# artisan:
-# 	@cd ./laradock && docker-compose exec --user=laradock workspace php artisan $(filter-out $@,$(MAKECMDGOALS))
+# run artisan tinker
+tinker:
+	@cd ./laradock && docker-compose exec --user=laradock workspace php artisan tinker
+# follow the laravel logs
+logs:
+	@cd ./laradock && docker-compose exec --user=laradock workspace tail -f -n20 storage/logs/laravel.log
 # refresh the application
 refresh:
 	@cd ./laradock && docker-compose down
