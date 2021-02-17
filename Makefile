@@ -16,6 +16,7 @@ init:
 	@git submodule init # initialize laradock-blueprint repository
 	@git submodule update # actually fetch the content of laradock-blueprint
 	@cp .env.docker.example ./laradock/.env
+	@cd ./laradock && docker-compose build --no-cache $(CONTAINERS)
 	@cd ./laradock && docker-compose up -d $(CONTAINERS)
 	@echo "Giving containers some time to boot before we continue ... ⌚"
 	@sleep $(WAITING_TIME)
@@ -48,7 +49,7 @@ upgrade-blueprint:
 #
 # build containers
 build:
-	@cd ./laradock && docker-compose build $(CONTAINERS)
+	@cd ./laradock && docker-compose build --no-cache $(CONTAINERS)
 # start the laradock setup
 up:
 	@cd ./laradock && docker-compose up -d $(CONTAINERS)
@@ -94,6 +95,7 @@ refresh:
 	@cd ./laradock && docker-compose down
 	@echo "We need sudo permissions to delete the `.laradock` data folder 🔐"
 	sudo rm -rf ./.laradock
+	@cd ./laradock && docker-compose build --no-cache $(CONTAINERS)
 	@cd ./laradock && docker-compose up -d $(CONTAINERS)
 	@echo "Giving containers some time to boot before we continue ... ⌚"
 	@sleep $(WAITING_TIME)
