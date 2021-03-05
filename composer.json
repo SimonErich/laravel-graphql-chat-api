@@ -22,6 +22,7 @@
         "tjventurini/graphql-exceptions": "^0.0.2"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.9",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "haydenpierce/class-finder": "^0.4.2",
@@ -70,11 +71,19 @@
         "post-install-cmd": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate --ansi",
-            "@php artisan app:install --refresh --seed --demo"
+            "@php artisan clear-compiled",
+            "@php artisan app:install --seed --demo",
+            "@php artisan security-check:now",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta",
+            "@php artisan storage:link"
         ],
         "post-update-cmd": [
+            "@php artisan clear-compiled",
             "@php artisan migrate",
-            "@php artisan security-check:now"
+            "@php artisan security-check:now",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta"
         ]
     }
 }
