@@ -38,3 +38,11 @@ And then run the `make init` command to spin up the docker containers.
 ```bash
 make init
 ```
+
+
+**Start up websocket server:**
+
+Either ssh into your server or into the worker docker container and call the following artisan command:
+```bash
+php artisan websockets:serve
+```
