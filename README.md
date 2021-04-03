@@ -11,13 +11,30 @@ You can find a small documentation of all the available queries and mutations in
 
 ## Getting Started
 
+**Clone Repo:**
+
 To get started, just clone this repo:
 
 ```bash
+git clone git@github.com:SimonErich/laravel-graphql-chat-api.git
 ```
+
+
+**Rename env files:**
+
+Copy and rename the .env files for configuration
+
+```bash
+cp .env.example .env
+cp .env.docker.example .env.docker
+```
+
+
+**Start up containers:**
 
 And then run the `make init` command to spin up the docker containers.
 (you need docker and docker-compose installed and working on your device)
 
 ```bash
+make init
 ```
