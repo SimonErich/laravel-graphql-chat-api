@@ -15,11 +15,13 @@
         "jorijn/laravel-security-checker": "^2.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "marqant-lab/auth-graphql": "^2.0",
         "nuwave/lighthouse": "^4.18",
         "orchid/platform": "^9.14",
+        "pusher/pusher-php-server": "^6.1",
         "sentry/sentry-laravel": "^2.3",
         "tjventurini/ddi": "^1.0",
-        "tjventurini/graphql-exceptions": "^0.0.2"
+        "tjventurini/graphql-exceptions": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

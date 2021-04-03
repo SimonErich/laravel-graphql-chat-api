@@ -5,14 +5,64 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
-    users: [User!]! @paginate(defaultCount: 10)
-    user(id: ID @eq): User @find
+    users: [User!]! @paginate(defaultCount: 30)
+    user(id: ID! @eq): User @find
+    getRooms: [Room!]! @paginate(defaultCount: 20)
+    getRoom(id: ID! @eq): Room @find
+    getMessages(roomId: ID!): [Message!]! @paginate(defaultCount: 35)
 }
+
+type Mutation {
+    "rooms"
+    createRoom(title: String!, description: String, public: Boolean): Room! @create @guard
+    updateRoom(id: ID!, title: String!, description: String): Room! @update @guard
+    deleteRoom(id: ID!): Room! @delete @guard
+
+    "messages"
+    createMessage(
+        body: String!, 
+        roomId: ID! @rename(attribute: "room_id") 
+    ): Message! @create @guard @broadcast(subscription: "newMessagesInRoom")
+    updateMessage(id: ID!, body: String!): Message! @update @guard
+    deleteMessage(id: ID!): Message! @delete @guard
+}
+
+type Subscription {
+  newMessagesInRoom(roomId: ID): Message
+}
+
+
+#import ../vendor/marqant-lab/auth-graphql/graphql/*.graphql
 
 type User {
     id: ID!
     name: String!
     email: String!
-    created_at: DateTime!
-    updated_at: DateTime!
+    bio: String
+    avatar: String
+    rooms: [Room]
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
 }
+
+type Room {
+    id: ID!
+    title: String!
+    description: String!
+    public: Boolean!
+    creator: User!
+    messages: [Message]
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}
+
+type Message {
+    id: ID!
+    body: String!
+    room: Room
+    author: User
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}
+
+
