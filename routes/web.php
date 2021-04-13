@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/test-broadcasting', function () {
+    App\Events\TestBroadcastCreated::dispatch();
+
+    return 'Broadcast Send';
+});
