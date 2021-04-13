@@ -49,9 +49,9 @@ return [
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
-                'encrypted' => false,
+                'encrypted' => true,
                 'host' => 'socket.api.demochat.stage.jetzt',
-                'port' => 443,
+                'port' => null,
                 'scheme' => 'https'
             ],
         ],
