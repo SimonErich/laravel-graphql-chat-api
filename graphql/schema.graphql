@@ -29,7 +29,7 @@ type Mutation {
 
 type Subscription {
   newMessagesInRoom(roomId: ID): Message
-  changesInRoomList(roomId: ID): Room
+  changesInRoomList: Room
 }
 
 
