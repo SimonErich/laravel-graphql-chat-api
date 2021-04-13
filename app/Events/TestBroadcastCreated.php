@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Queue\SerializesModels;
@@ -15,17 +14,18 @@ class TestBroadcastCreated implements ShouldBroadcast
     /**
      * Just a random string to see whether it works or not
      */
-    public $test = 'Everything working';
+    public $test = '';
 
     /**
      * Create a new event instance.
+     * 
+     * @param string $msg
      *
-     * @param  \App\Models\User  $user
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct($msg = 'Everything working')
     {
-        $this->user = $user;
+        $this->test = $msg;
     }
 
     /**
