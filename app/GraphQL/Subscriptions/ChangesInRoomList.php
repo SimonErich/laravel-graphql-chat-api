@@ -3,9 +3,7 @@
 namespace App\GraphQL\Subscriptions;
 
 use Illuminate\Http\Request;
-use GraphQL\Type\Definition\ResolveInfo;
 use Nuwave\Lighthouse\Schema\Types\GraphQLSubscription;
-use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 use Nuwave\Lighthouse\Subscriptions\Subscriber;
 
 class ChangesInRoomList extends GraphQLSubscription
