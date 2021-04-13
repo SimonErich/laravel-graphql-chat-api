@@ -14,9 +14,9 @@ type Query {
 
 type Mutation {
     "rooms"
-    createRoom(title: String!, description: String, public: Boolean): Room! @create @guard @broadcast(subscription: "changesInRoomList")
-    updateRoom(id: ID!, title: String!, description: String): Room! @update @guard @broadcast(subscription: "changesInRoomList")
-    deleteRoom(id: ID!): Room! @delete @guard @broadcast(subscription: "changesInRoomList")
+    createRoom(title: String!, description: String, public: Boolean): Room! @create @guard  @broadcast(subscription: "changesInRoomList")
+    updateRoom(id: ID!, title: String!, description: String): Room! @update @guard  @broadcast(subscription: "changesInRoomList")
+    deleteRoom(id: ID!): Room! @delete @guard  @broadcast(subscription: "changesInRoomList")
 
     "messages"
     createMessage(
