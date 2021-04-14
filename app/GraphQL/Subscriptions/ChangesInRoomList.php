@@ -29,6 +29,6 @@ class ChangesInRoomList extends GraphQLSubscription
      */
     public function filter(Subscriber $subscriber, $root): bool
     {
-        return true;
+        return false;
     }
 }
